@@ -23,7 +23,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
       return token
     },
-    async session ({session, token}: any) {
+    async session ({session, token}: any): Promise<any> {
       if(token.role && session.user) {
         session.user.id = token.id;
         session.user.role = token.role;
