@@ -10,6 +10,7 @@ import { GetAllSnippetFuncArgs, GetAllSnippetsReturnType, SnippetItemType } from
 export type CreateSnippetType = Prisma.Args<typeof db.snippets, "create">["data"];
 
 export const createSnippetAction = async (snippet: CreateSnippetType) => {
+
   try {
     await db.snippets.create({ data: snippet });
     revalidatePath("/feed");
