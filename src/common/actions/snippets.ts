@@ -32,7 +32,7 @@ export const editSnippetAction = async (id: string, snippet: CreateSnippetType) 
     revalidatePath(`snippet/${id}/edit`);
   } catch (error: any) {
     console.log(error);
-    throw new Error(error);
+    throw new Error();
   }
 };
 
