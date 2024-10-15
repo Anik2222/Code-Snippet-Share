@@ -7,6 +7,22 @@ import { db } from "@/lib/db";
 
 import { GetAllSnippetFuncArgs, GetAllSnippetsReturnType, SnippetItemType } from "../types";
 
+
+interface SnippetFilters {
+  isPublic: boolean;
+  OR: Array<{
+    title?: {
+      contains: string;
+      mode: 'insensitive';
+    };
+    description?: {
+      contains: string;
+      mode: 'insensitive';
+    };
+  }>;
+  language?: string; // Optional language filter
+}
+
 export type CreateSnippetType = Prisma.Args<typeof db.snippets, "create">["data"];
 
 export const createSnippetAction = async (snippet: CreateSnippetType) => {
@@ -41,7 +57,7 @@ export const getAllSnippetsAction = async ({ page, searchText, language, limit =
   try {
     const skipRecords = (page - 1) * limit;
 
-    const filters: any = {
+    const filters: SnippetFilters = {
       isPublic: true,
       OR: [
         {

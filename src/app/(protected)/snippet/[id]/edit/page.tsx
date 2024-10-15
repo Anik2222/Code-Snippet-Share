@@ -30,7 +30,7 @@ export default function EditSnippetPage() {
     );
 
     setData(snippet);
-  }, [id])
+  }, [snippetId])
 
   useEffect(() => {
     getData();
