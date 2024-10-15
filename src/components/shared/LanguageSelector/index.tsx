@@ -13,6 +13,13 @@ type Props = {
   onChange: (language: string) => void;
 }
 
+//Define a type for the Monaco language objects
+type MonacoLanguage = {
+  id: string;
+  extensions?: string[];
+  aliases?: string[];
+};
+
 export const LanguageSelector = ({ value, onChange }: Props) => {
     const monaco = useMonaco();
 
@@ -25,7 +32,7 @@ export const LanguageSelector = ({ value, onChange }: Props) => {
     
     const allLanguages = useMemo(() => {
         const languages = monaco?.languages?.getLanguages();
-        if(!!languages) return languages;
+        if(!!languages) return languages as MonacoLanguage[];
         
         return [];
     }, [monaco])

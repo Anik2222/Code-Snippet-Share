@@ -14,7 +14,7 @@ export const createSnippetAction = async (snippet: CreateSnippetType) => {
   try {
     await db.snippets.create({ data: snippet });
     revalidatePath("/feed");
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.log(error);
     throw new Error(error);
   }
@@ -31,7 +31,7 @@ export const editSnippetAction = async (id: string, snippet: CreateSnippetType) 
     revalidatePath("/feed");
     revalidatePath(`snippet/${id}`);
     revalidatePath(`snippet/${id}/edit`);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.log(error);
     throw new Error();
   }
@@ -92,7 +92,7 @@ export const getAllSnippetsAction = async ({ page, searchText, language, limit =
         totalPages: Math.ceil(records[0] / limit)
     }
 
-  } catch (err) {
+  } catch (err: unknown) {
     console.log(err);
     return {
         data: [],
@@ -115,7 +115,7 @@ export const getAllSnippetByIdAction = async (id: string): Promise<SnippetItemTy
         }
       }
     });
-  } catch (err) {
+  } catch (err: unknown) {
     console.log(err);
     return null;
   }
