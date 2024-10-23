@@ -15,7 +15,7 @@ export const LanguageFilter = () => {
     useEffect(() => {
         const language = searchParams.get('language') || '';
         setSelectedLanguage(language);
-    })
+    }, [searchParams])
 
 
     const handleChange = (value: string) => {

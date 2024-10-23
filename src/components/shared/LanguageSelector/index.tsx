@@ -32,7 +32,7 @@ export const LanguageSelector = ({ value, onChange }: Props) => {
     
     const allLanguages = useMemo(() => {
         const languages = monaco?.languages?.getLanguages();
-        if(!!languages) return languages as MonacoLanguage[];
+        if(languages) return languages as MonacoLanguage[];
         
         return [];
     }, [monaco])
@@ -56,7 +56,7 @@ export const LanguageSelector = ({ value, onChange }: Props) => {
           className="min-w-[200px] w-full justify-between capitalize"
         >
           {selectedLanguage
-            ? allLanguages.find((language: any) => language.id === selectedLanguage)?.id
+            ? allLanguages.find((language: MonacoLanguage) => language.id === selectedLanguage)?.id
             : "Select language..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -67,7 +67,7 @@ export const LanguageSelector = ({ value, onChange }: Props) => {
           <CommandList>
             <CommandEmpty>No language found.</CommandEmpty>
             <CommandGroup>
-              {allLanguages.map((language: any) => (
+              {allLanguages.map((language: MonacoLanguage) => (
                 <CommandItem
                   className="capitalize"
                   key={language.id}

@@ -50,10 +50,18 @@ export const SnippetForm = ({ isNew, values, onSubmit }: Props) => {
     };
 
     useEffect(() => {
-      if(!isNew && !!values) {
+      if (!isNew && values) {
+        const setData = () => {
+          const tags = (values?.tags || []).join(",");
+          form.setValue("code", values?.code || "");
+          form.setValue("description", values?.description || "");
+          form.setValue("title", values?.title || "");
+          form.setValue("language", values?.language || "");
+          form.setValue("tags", tags);
+        };
         setData();
       }
-    }, [isNew, values]);
+    }, [isNew, values, form]);
 
 
     const handleSubmit = (values: z.infer<typeof createSnippetFormSchema>) => {
