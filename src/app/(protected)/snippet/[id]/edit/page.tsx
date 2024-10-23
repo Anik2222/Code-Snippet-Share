@@ -37,12 +37,20 @@ export default function EditSnippetPage() {
   }, [getData]);
 
   const onSubmit = async (values: z.infer<typeof createSnippetFormSchema>) => {
+    if (!user) {
+      toast({
+        title: "Error",
+        description: "You must be logged in to edit a snippet.",
+      });
+      return; // Stop further execution if user is null
+    }
+
     try {
       const body: CreateSnippetType = {
         ...values,
         authorId: user.id,
         tags: values.tags
-          ? values?.tags.split(",").map((t: string) => t.trim())
+          ? values.tags.split(",").map((t: string) => t.trim())
           : [],
       };
 
