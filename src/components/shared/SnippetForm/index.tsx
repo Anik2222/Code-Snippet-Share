@@ -39,16 +39,6 @@ export const SnippetForm = ({ isNew, values, onSubmit }: Props) => {
         },
     });
 
-    const setData = () => {
-      const tags = (values?.tags || []).join(',');
-
-      form.setValue('code', values?.code || '');
-      form.setValue('description', values?.description || '');
-      form.setValue('title', values?.title || '');
-      form.setValue('language', values?.language || '');
-      form.setValue('tags', tags);
-    };
-
     useEffect(() => {
       if (!isNew && values) {
         const setData = () => {
